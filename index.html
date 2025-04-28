@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    
+
+    <title>Regular Expressions - Presentation</title>
+
+    <!-- Reveal.js styles -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css"
+    />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <script src="plugin/highlight/highlight.js"></script>
+    <!-- Custom styles -->
+    <style>
+      .reveal h1 {
+        font-size: 32px;
+        color: #ffd700;
+      }
+      .reveal h2 {
+        font-size: 32px;
+        color: #ffd700;
+      }
+      .reveal p {
+        font-size: 22px;
+        color: #ffffff;
+      }
+      .reveal li {
+        font-size: 22px;
+        color: #ffffff;
+      }
+      body {
+        background-color: #000000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Regular Expressions</h1>
+          <p>Introduction and Basics</p>
+        </section>
+        <section>
+          <h2>Relevance of the Project</h2>
+          <ul>
+            <li>Working with large amounts of text data is critical in today's digital world.</li>
+            <li>Regular expressions provide a universal tool for text processing across different fields and industries.</li>
+            <li>They help automate repetitive tasks, improving efficiency and reducing human error.</li>
+            <li>Regex is fundamental for tasks such as input validation, web scraping, log file analysis, and more.</li>
+            <li>Knowledge of regular expressions is a must-have skill for modern developers, data scientists, and system administrators.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Problems Solved by Regular Expressions</h2>
+          <ul>
+            <li>Finding specific patterns in large texts quickly and accurately.</li>
+            <li>Validating user input formats (such as emails, phone numbers, or passwords).</li>
+            <li>Extracting necessary information from unstructured or semi-structured data.</li>
+            <li>Automating search-and-replace operations across files and databases.</li>
+            <li>Ensuring data consistency and enforcing rules without manual review.</li>
+            <li>Speeding up tasks that would otherwise require complex code or manual processing.</li>
+          </ul>
+        </section>
+                
+        <section>
+          <h2>What are Regular Expressions?</h2>
+          <p>
+            Regular expressions (regex) are patterns used to match character
+            combinations in strings.
+          </p>
+          <pre><code data-trim data-noescape>
+				  // Example: matching a simple pattern
+				  const regex = /abc/;
+				  const result = regex.test('abcdef'); // returns true</code></pre>
+        </section>
+        <section>
+          <section>
+            <h2>Using Basic Symbols in Regular Expressions</h2>
+            <p>
+              Here are some of the most common symbols in regular expressions:
+            </p>
+            <ul>
+              <li>
+                <strong>.</strong> matches any single character except newline.
+              </li>
+              <li>
+                <strong>*</strong> matches 0 or more repetitions of the
+                preceding character.
+              </li>
+              <li>
+                <strong>+</strong> matches 1 or more repetitions of the
+                preceding character.
+              </li>
+              <li><strong>^</strong> matches the start of the string.</li>
+              <li><strong>$</strong> matches the end of the string.</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Examples:</h3>
+            <pre><code data-trim data-noescape>
+				  // Example 1: Using "."
+				  const regexDot = /a.c/;
+				  console.log(regexDot.test('abc')); // returns true
+				  console.log(regexDot.test('ac')); // returns false</code></pre>
+
+            <pre><code data-trim data-noescape>
+				  // Example 2: Using "*"
+				  const regexStar = /ab*c/;
+				  console.log(regexStar.test('ac')); // returns true
+				  console.log(regexStar.test('abbc')); // returns true</code></pre>
+
+            <pre><code data-trim data-noescape>
+				  // Example 3: Using "+"
+				  const regexPlus = /ab+c/;
+				  console.log(regexPlus.test('abc')); // returns true
+				  console.log(regexPlus.test('ac')); // returns false</code></pre>
+
+            <pre><code data-trim data-noescape>
+				  // Example 4: Using "^" and "$"
+				  const regexStartEnd = /^abc$/;
+				  console.log(regexStartEnd.test('abc')); // returns true
+				  console.log(regexStartEnd.test('abc123')); // returns false</code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Meta Characters in Regular Expressions</h2>
+            <p>
+              These are special characters that help you create more complex
+              regex patterns:
+            </p>
+            <ul>
+              <li><strong>\d</strong> matches any digit (0-9).</li>
+              <li>
+                <strong>\w</strong> matches any word character (alphanumeric +
+                underscore).
+              </li>
+              <li>
+                <strong>\s</strong> matches any whitespace character (spaces,
+                tabs, newlines).
+              </li>
+              <li><strong>\b</strong> matches a word boundary.</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Example 1: Using "\d"</h2>
+            <pre><code data-trim data-noescape>
+	  // Matches any digit (0-9)
+	  const regexDigit = /\d/;
+	  console.log(regexDigit.test('123')); // returns true (contains digits)
+	  console.log(regexDigit.test('abc')); // returns false (no digits)</code></pre>
+
+            <!-- Example for \w -->
+
+            <h2>Example 2: Using "\w"</h2>
+            <pre><code data-trim data-noescape>
+	  // Matches any alphanumeric character (letters, numbers, underscores)
+	  const regexWordChar = /\w/;
+	  console.log(regexWordChar.test('abc123')); // returns true (valid word characters)
+	  console.log(regexWordChar.test('!@#')); // returns false (special characters)</code></pre>
+          </section>
+          <!-- Example for \s -->
+          <section>
+            <h2>Example 3: Using "\s"</h2>
+            <pre><code data-trim data-noescape>
+	  // Matches any whitespace character (space, tab, newline)
+	  const regexSpace = /\s/;
+	  console.log(regexSpace.test('hello world')); // returns true (contains space)
+	  console.log(regexSpace.test('helloworld')); // returns false (no space)</code></pre>
+
+            <!-- Example for \b -->
+
+            <h2>Example 4: Using "\b"</h2>
+            <pre><code data-trim data-noescape>
+	  // Matches a word boundary
+	  const regexWordBoundary = /\bcat\b/;
+	  console.log(regexWordBoundary.test('the cat is here')); // returns true (word boundary)
+	  console.log(regexWordBoundary.test('the catapult is here')); // returns false (no boundary)</code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+          <h2>Quantifiers in Regular Expressions</h2>
+          <p>Quantifiers specify how many times an element must occur:</p>
+          <ul>
+            <li><strong>*</strong> — 0 or more times</li>
+            <li><strong>+</strong> — 1 or more times</li>
+            <li><strong>?</strong> — 0 or 1 time</li>
+            <li><strong>{n}</strong> — exactly n times</li>
+            <li><strong>{n,}</strong> — n or more times</li>
+            <li><strong>{n,m}</strong> — between n and m times</li>
+          </ul>
+        </section>
+        
+          <section>
+            <h3>Example 1: *</h3>
+            <pre><code data-trim data-noescape>
+        // Matches 'a' repeated 0 or more times
+        const regex = /a*/;
+        console.log('aaa'.match(regex)); // ['aaa']
+        console.log('bbb'.match(regex)); // ['']
+            </code></pre>
+          </section>
+        
+          <section>
+            <h3>Example 2: +</h3>
+            <pre><code data-trim data-noescape>
+        // Matches 'a' repeated 1 or more times
+        const regex = /a+/;
+        console.log('aaa'.match(regex)); // ['aaa']
+        console.log('bbb'.match(regex)); // null
+            </code></pre>
+          </section>
+        
+          <section>
+            <h3>Example 3: ?</h3>
+            <pre><code data-trim data-noescape>
+        // Matches 'a' 0 or 1 time
+        const regex = /a?/;
+        console.log('a'.match(regex)); // ['a']
+        console.log('b'.match(regex)); // ['']
+            </code></pre>
+          </section>
+        
+          <section>
+            <h3>Example 4: {n}</h3>
+            <pre><code data-trim data-noescape>
+        // Matches exactly 3 'a's
+        const regex = /a{3}/;
+        console.log('aaab'.match(regex)); // ['aaa']
+        console.log('aab'.match(regex)); // null
+            </code></pre>
+          </section>
+        
+          <section>
+            <h3>Example 5: {n,}</h3>
+            <pre><code data-trim data-noescape>
+        // Matches 2 or more 'a's
+        const regex = /a{2,}/;
+        console.log('aaaaa'.match(regex)); // ['aaaaa']
+        console.log('a'.match(regex)); // null
+            </code></pre>
+          </section>
+        
+          <section>
+            <h3>Example 6: {n,m}</h3>
+            <pre><code data-trim data-noescape>
+        // Matches between 2 and 4 'a's
+        const regex = /a{2,4}/;
+        console.log('aaaaa'.match(regex)); // ['aaaa']
+        console.log('a'.match(regex)); // null
+            </code></pre>
+          </section>
+        
+        </section>
+        <section>
+          <section>
+          <h2>Character Classes in Regular Expressions</h2>
+          <p>Character classes allow you to match specific sets or ranges of characters:</p>
+          <ul>
+            <li><strong>[abc]</strong> — matches any one of 'a', 'b', or 'c'</li>
+            <li><strong>[a-z]</strong> — matches any lowercase letter</li>
+            <li><strong>[^abc]</strong> — matches any character except 'a', 'b', or 'c'</li>
+          </ul>
+        </section>
+          <section>
+            <h3>Example 1: [abc]</h3>
+            <pre><code data-trim data-noescape>
+        // Matches 'a', 'b', or 'c'
+        const regex = /[abc]/;
+        console.log('apple'.match(regex)); // ['a']
+        console.log('dog'.match(regex)); // null
+            </code></pre>
+          </section>
+        
+          <section>
+            <h3>Example 2: [a-z]</h3>
+            <pre><code data-trim data-noescape>
+        // Matches any lowercase letter
+        const regex = /[a-z]/;
+        console.log('Hello'.match(regex)); // ['e']
+        console.log('123'.match(regex)); // null
+            </code></pre>
+          </section>
+        
+          <section>
+            <h3>Example 3: [^abc]</h3>
+            <pre><code data-trim data-noescape>
+        // Matches any character except 'a', 'b', or 'c'
+        const regex = /[^abc]/;
+        console.log('cat'.match(regex)); // ['t']
+        console.log('aaa'.match(regex)); // null
+            </code></pre>
+          </section>
+        
+        </section>
+        <section>
+          <h2>Conclusion</h2>
+          <ul>
+            <li>Regular expressions are a powerful tool for working with text patterns.</li>
+            <li>They allow searching, validating, extracting, and replacing parts of strings efficiently.</li>
+            <li>Regex is widely used in web development, data analysis, security, and automation.</li>
+            <li>Understanding syntax like character classes, quantifiers, anchors, and groups is essential.</li>
+            <li>Despite their complexity at first glance, regular practice makes regex intuitive and highly useful.</li>
+            <li>Mastering regular expressions boosts productivity and opens new possibilities in programming tasks.</li>
+          </ul>
+        </section>
+        
+        
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        plugins: [RevealHighlight],
+      });
+    </script>
+  </body>
+</html>
